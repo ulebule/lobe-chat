@@ -5,6 +5,7 @@ import Ai302Provider from './ai302';
 import Ai360Provider from './ai360';
 import AiHubMixProvider from './aihubmix';
 import AkashChatProvider from './akashchat';
+import AgenticalProvider from './agentical';
 import AnthropicProvider from './anthropic';
 import AzureProvider from './azure';
 import AzureAIProvider from './azureai';
@@ -76,6 +77,7 @@ export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
   ZhiPuProvider.chatModels,
   BedrockProvider.chatModels,
   DeepSeekProvider.chatModels,
+  AgenticalProvider.chatModels,
   GoogleProvider.chatModels,
   GroqProvider.chatModels,
   GithubProvider.chatModels,
@@ -127,6 +129,7 @@ export const DEFAULT_MODEL_PROVIDER_LIST = [
   OpenAIProvider,
   { ...AzureProvider, chatModels: [] },
   AzureAIProvider,
+  AgenticalProvider,
   OllamaProvider,
   OllamaCloudProvider,
   VLLMProvider,
@@ -201,6 +204,7 @@ export const isProviderDisableBrowserRequest = (id: string) => {
   return !!provider;
 };
 
+export { default as AgenticalProviderCard } from './agentical';
 export { default as Ai21ProviderCard } from './ai21';
 export { default as Ai302ProviderCard } from './ai302';
 export { default as Ai360ProviderCard } from './ai360';

@@ -1,0 +1,38 @@
+---
+title: Agentical
+description: Configure the Agentical WebRTC provider in LobeChat.
+---
+
+Agentical connects to your LLM runtime over WebRTC in the browser while using an OpenAI-compatible prompt/response schema. The session is initiated with a WebSocket signaling server that exchanges SDP offers/answers and ICE candidates to establish a peer-to-peer data channel.
+
+## Requirements
+
+- Agentical signaling endpoint reachable via `wss://`
+- Optional API key (if your signaling server requires authentication)
+- Browser environment with WebRTC support (desktop/server mode is **not** supported for this provider)
+
+## Configuration Steps
+
+1. Open **Settings → Providers → Agentical** in the app.
+2. Enter your **API Key** (if required).
+3. Enter the **Signaling URL** (for example, `wss://signal.agentical.example/v1`).
+4. Save; client fetch mode will activate automatically once either field is filled.
+
+> The configuration panel hides the client/server toggle because Agentical always runs in the browser. If no signaling URL or API key is set, LobeChat will not attempt WebRTC sessions.
+
+## How It Works
+
+1. LobeChat initiates a WebSocket connection to your signaling server.
+2. An SDP offer and ICE candidates are exchanged until a WebRTC data channel is established.
+3. Chat payloads are transported through that channel using the OpenAI streaming format; responses are rendered identically to other OpenAI-compatible providers.
+4. Abort signals and disconnects propagate to close the peer connection cleanly.
+
+## Troubleshooting
+
+- **Connection never opens**: confirm the signaling URL is correct and supports the `/offer` flow expected by Agentical.
+- **`Agentical signaling handshake timed out`**: NAT traversal failed; ensure ICE servers are accessible or provide TURN relays.
+- **Server returned HTTP 403/401**: supply the required API key in the Agentical provider panel.
+- **Streams stop mid-response**: inspect browser devtools → Network → WebSocket for signaling errors, then check the Agentical runtime logs.
+
+Refer to your Agentical deployment documentation for advanced signaling or TURN server configuration.
+

@@ -36,6 +36,14 @@ describe('aiProviderSelectors', () => {
         },
         settings: {},
       },
+      agentical: {
+        keyVaults: {
+          apiKey: 'agentical-key',
+          baseURL: 'wss://signal.agentical.local',
+        },
+        settings: {},
+        fetchOnClient: false,
+      },
       ollama: {
         keyVaults: {},
         settings: {},
@@ -204,6 +212,25 @@ describe('aiProviderSelectors', () => {
 
     it('should follow user settings if both endpoint and api key exist', () => {
       expect(aiProviderSelectors.isProviderFetchOnClient('provider1')(mockState)).toBe(true);
+    });
+
+    it('should force client fetch for agentical when connection details exist', () => {
+      expect(aiProviderSelectors.isProviderFetchOnClient('agentical')(mockState)).toBe(true);
+    });
+
+    it('should return false for agentical when no connection details', () => {
+      const state = {
+        ...mockState,
+        aiProviderRuntimeConfig: {
+          ...mockState.aiProviderRuntimeConfig,
+          agentical: {
+            keyVaults: {},
+            settings: {},
+          },
+        },
+      };
+
+      expect(aiProviderSelectors.isProviderFetchOnClient('agentical')(state)).toBe(false);
     });
   });
 

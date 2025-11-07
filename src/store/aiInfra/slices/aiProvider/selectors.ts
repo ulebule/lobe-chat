@@ -26,6 +26,7 @@ const isAiProviderConfigLoading = (id: string) => (s: AIProviderStoreState) =>
   s.activeAiProvider !== id;
 
 const providerWhitelist = new Set(['ollama', 'lmstudio']);
+const clientOnlyProviders = new Set(['agentical']);
 
 const activeProviderKeyVaults = (s: AIProviderStoreState) => activeProviderConfig(s)?.keyVaults;
 
@@ -60,6 +61,11 @@ const isProviderConfigUpdating = (id: string) => (s: AIProviderStoreState) =>
 const isProviderFetchOnClient =
   (provider: GlobalLLMProviderKey | string) => (s: AIProviderStoreState) => {
     const config = providerConfigById(provider)(s);
+
+    if (clientOnlyProviders.has(provider)) {
+      const vault = config?.keyVaults || {};
+      return !!vault.baseURL || !!vault.apiKey;
+    }
 
     // If the provider already disable browser request in model config, force on Server.
     if (isProviderDisableBrowserRequest(provider)) return false;
