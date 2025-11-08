@@ -55,7 +55,7 @@
     "dev:desktop": "next dev --turbopack -p 3015",
     "dev:fast": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next dev --turbopack -p 3010",
     "dev:mobile": "next dev --turbopack -p 3018",
-    "dev:lan": "next dev --turbopack -p 3010 --hostname 0.0.0.0",
+    "dev:lan": "next dev --turbopack -p 3010 --hostname 192.168.1.116",
     "docs:i18n": "lobe-i18n md && npm run lint:md && npm run lint:mdx && prettier -c --write locales/**/*",
     "docs:seo": "lobe-seo && npm run lint:mdx",
     "e2e": "cd e2e && npm run test:smoke",
