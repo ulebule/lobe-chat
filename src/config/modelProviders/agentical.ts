@@ -1,23 +1,31 @@
 import { ModelProviderCard } from '@/types/llm';
 
 const Agentical: ModelProviderCard = {
-  chatModels: [],
+  chatModels: [
+    {
+      description: 'Default Agentical WebRTC model for local development.',
+      displayName: 'Agentical LLM',
+      enabled: true,
+      id: 'agentical-llm',
+    },
+  ],
+  checkModel: 'agentical-llm',
   description:
-    'Agentical 通过 WebRTC 连接提供 OpenAI 兼容的对话服务，适合需要低延迟、端到端传输的实时场景。',
+    'Agentical: maximal private and secure AI agentic LLM API service.',
   id: 'agentical',
   modelList: { showModelFetcher: false },
   name: 'Agentical',
   settings: {
     defaultShowBrowserRequest: true,
     disableBrowserRequest: true,
-    sdkType: 'openai',
-    showApiKey: true,
     proxyUrl: {
-      placeholder: 'wss://your-agentical-signaling-url',
+      placeholder: 'ws://localhost:3003/webrtc',
       title: 'Signaling URL',
     },
+    sdkType: 'openai',
+    showApiKey: true,
   },
-  url: 'https://agentical.ai',
+  url: 'https://agentical.net',
 };
 
 export default Agentical;

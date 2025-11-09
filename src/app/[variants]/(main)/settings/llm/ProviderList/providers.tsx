@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import {
   Ai21ProviderCard,
   Ai360ProviderCard,
+  AgenticalProviderCard,
   AnthropicProviderCard,
   BaichuanProviderCard,
   CohereProviderCard,
@@ -62,11 +63,13 @@ export const useProviderList = (): ProviderItem[] => {
   const HuggingFaceProvider = useHuggingFaceProvider();
 
   return useMemo(
-    () => [
-      OpenAIProvider,
-      AzureProvider,
-      OllamaProvider,
-      VLLMProviderCard,
+    () => {
+      const providers = [
+        OpenAIProvider,
+        AzureProvider,
+        AgenticalProviderCard,
+        OllamaProvider,
+        VLLMProviderCard,
       XinferenceProviderCard,
       AnthropicProviderCard,
       BedrockProvider,
@@ -110,7 +113,26 @@ export const useProviderList = (): ProviderItem[] => {
       GiteeAIProviderCard,
       PPIOProviderCard,
       InfiniAIProviderCard,
-    ],
+      ];
+
+      // Debug: check for duplicate IDs
+      const idMap = new Map<string, number>();
+      providers.forEach((provider, index) => {
+        if (idMap.has(provider.id)) {
+          console.warn(`Duplicate provider ID found: "${provider.id}" at index ${index} and ${idMap.get(provider.id)}`);
+        } else {
+          idMap.set(provider.id, index);
+        }
+      });
+
+      // Remove duplicates based on id (keep first occurrence)
+      const uniqueProviders = providers.filter((provider, index) => {
+        const firstIndex = providers.findIndex(p => p.id === provider.id);
+        return firstIndex === index;
+      });
+
+      return uniqueProviders;
+    },
     [
       AzureProvider,
       OllamaProvider,

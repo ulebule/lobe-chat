@@ -27,6 +27,9 @@ export const getServerGlobalConfig = async () => {
 
   const aiProviderStartTime = Date.now();
   const aiProviderConfig = await genServerAiProvidersConfig({
+      agentical: {
+        fetchOnClient: true,
+      },
     azure: {
       enabledKey: 'ENABLED_AZURE_OPENAI',
       withDeploymentName: true,
