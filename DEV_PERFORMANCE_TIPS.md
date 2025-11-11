@@ -1,4 +1,4 @@
-# 🚀 Tips za Pospešitev `bun run dev`
+c# 🚀 Tips za Pospešitev `bun run dev`
 
 ## ✅ Optimizacije Ki So Že Implementirane
 

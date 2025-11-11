@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
 
 import { DEFAULT_SUPERVISOR_AVATAR } from '@/const/meta';
-import { ChatItem } from '@/features/ChatItem';
+import ChatItem from '@/features/ChatItem';
 import { useChatStore } from '@/store/chat';
 import { ChatErrorType } from '@/types/fetch';
 
