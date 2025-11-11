@@ -13,13 +13,13 @@ export const DEFAULT_LLM_CONFIG = genUserLLMConfig({
   },
 });
 
-export const DEFAULT_MODEL = 'o1';
+export const DEFAULT_MODEL = 'agentical-llm';
 
-export const DEFAULT_EMBEDDING_MODEL = 'text-embedding-3-small';
-export const DEFAULT_EMBEDDING_PROVIDER = 'openai';
+export const DEFAULT_EMBEDDING_MODEL = 'auto_select';
+export const DEFAULT_EMBEDDING_PROVIDER = 'agentical';
 
 export const DEFAULT_RERANK_MODEL = 'rerank-english-v3.0';
 export const DEFAULT_RERANK_PROVIDER = 'cohere';
 export const DEFAULT_RERANK_QUERY_MODE = 'full_text';
 
-export const DEFAULT_PROVIDER = 'openai';
+export const DEFAULT_PROVIDER = 'agentical';
